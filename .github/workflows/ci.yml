@@ -5,6 +5,10 @@ on:
   push:
     branches: [feature/ci]
 
+permissions:
+  contents: read
+  checks: write
+
 jobs:
   code-lint:
     runs-on: ubuntu-latest
