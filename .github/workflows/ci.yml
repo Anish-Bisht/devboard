@@ -1,0 +1,27 @@
+# Goal: Master ci/cd using github workflows
+
+name: CI
+
+on:
+  push:
+    branches: [feature/ci]
+
+jobs:
+  build-and-push: 
+   runs-on: ubuntu-latest
+   steps: 
+    - name: Checkout code
+      uses: action/checkout@v7
+  
+    - name: Docker Setup [login]
+      uses: Docker/loginaction@v4
+      with:
+        username: ${{ vars.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+
+
+  
+  
+
+  
