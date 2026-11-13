@@ -14,7 +14,7 @@ jobs:
       uses: action/checkout@v7
   
     - name: Docker Setup [login]
-      uses: Docker/loginaction@v4
+      uses: Docker/login-action@v4
       with:
         username: ${{ vars.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
