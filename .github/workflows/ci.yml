@@ -93,5 +93,5 @@ jobs:
 
   cd:
     needs: [frontend, backend]
-    if: success()
     uses: ./.github/workflows/cd.yml
+    secrets: inherit
