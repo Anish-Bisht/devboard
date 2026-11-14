@@ -8,7 +8,7 @@ on:
     # paths:
     #   - '**'
     #   - '!.github/workflows/**'
-    branches: [feat/advance]
+    branches: [feat/maxtrix-docker-build-cong]
 
 jobs:
 
