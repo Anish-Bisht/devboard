@@ -19,7 +19,7 @@ jobs:
           go-version-file: 'go.mod'
           cache-dependency-path: go.sum
       - name: Install Nancy
-        run: go install github.com/sonatype-nexus-community/nancy@latest
+        run: go install github.com/sonatype-nexus-community/nancy@v1.0.46
 
       - name : Nancy
         run: go list -json -deps ./... | nancy sleuth
