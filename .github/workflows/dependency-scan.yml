@@ -18,11 +18,11 @@ jobs:
           go-version: 1.22
           go-version-file: 'go.mod'
           cache-dependency-path: go.sum
-      - name: Install Nancy
-        run: go install github.com/sonatype-nexus-community/nancy@v1.0.46
+      - name: Install Govulncheck
+        run: go install golang.org/x/vuln/cmd/govulncheck@v1.2.0
 
-      - name : Nancy
-        run: go list -json -deps ./... | nancy sleuth
+      - name : Govulncheck
+        run: govulncheck ./...
         working-directory: backend
 
       - name: Setup Node
@@ -36,7 +36,7 @@ jobs:
         run: npm audit
         working-directory: frontend
 
-
+        
 
 
 
