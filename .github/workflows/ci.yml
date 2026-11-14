@@ -3,12 +3,14 @@
 
 name: CI
 
-on: 
-  push:
-    # paths:
-    #   - '**'
-    #   - '!.github/workflows/**'
-    branches: [feat/maxtrix-docker-build-cong]
+on:
+  schedule:
+    - cron: '5 7 * * *'
+  # push:
+  #   # paths:
+  #   #   - '**'
+  #   #   - '!.github/workflows/**'
+  #   branches: [feat/maxtrix-docker-build-cong]
 
 jobs:
 
