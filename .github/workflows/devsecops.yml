@@ -1,0 +1,15 @@
+# Goal - To Run End to End DevsecOps Pipeline
+
+name: DevsecOps
+
+on: 
+  push:
+    branches: [feat/maxtrix-docker-build-cong]
+
+
+jobs:
+
+  code-quality:
+    uses: ./.github/workflows/code-quality.yml
+
+  
