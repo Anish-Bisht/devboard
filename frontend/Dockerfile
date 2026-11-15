@@ -6,10 +6,9 @@ RUN npm ci --legacy-peer-deps
 COPY . .
 RUN npm run build
 
-# Stage 2 — Minimal runtime with updated zlib
+# Stage 2 — Minimal runtime
 FROM alpine:3.21
-# Update packages to get fixed zlib 1.4-r0
-RUN apk update && apk upgrade && apk add --no-cache nginx=1.27.4-r2 zlib=1.4-r0
+RUN apk update && apk add --no-cache nginx zlib
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/http.d/custom.conf
 EXPOSE 4173
