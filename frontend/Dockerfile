@@ -1,16 +1,16 @@
 # Stage 1 — build the app into static files
-FROM node:20-alpine AS build
+FROM node:20-alpine3.21 AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --legacy-peer-deps
 COPY . .
 RUN npm run build
 
-# Stage 2 — small image that only serves the build (no nginx)
-FROM node:20-alpine
-WORKDIR /app
-RUN npm install -g vite@5 && npm cache clean --force
-COPY --from=build /app/dist ./dist
-COPY vite.preview.config.js ./vite.config.js
+# Stage 2 — Minimal runtime with updated zlib
+FROM alpine:3.21
+# Update packages to get fixed zlib 1.4-r0
+RUN apk update && apk upgrade && apk add --no-cache nginx zlib>=1.4-r0
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/http.d/custom.conf
 EXPOSE 4173
-CMD ["vite", "preview", "--host", "0.0.0.0", "--port", "4173"]
+CMD ["nginx", "-g", "daemon off;"]
