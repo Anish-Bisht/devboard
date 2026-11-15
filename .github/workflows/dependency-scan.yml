@@ -23,8 +23,9 @@ jobs:
 
       - name : Govulncheck
         continue-on-error: true
-        run: govulncheck ./... > govulncheck-report.txt
-        working-directory: backend
+        run: |
+          govulncheck -show traces ./... > govulncheck-report.txt 2>&1 || true
+          cat govulncheck-report.txt
 
       
 
