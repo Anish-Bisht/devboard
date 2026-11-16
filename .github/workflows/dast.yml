@@ -12,9 +12,14 @@ jobs:
       - name: Code Checkout
         uses: actions/checkout@v7
       
-      - name: Wait for servies to healthy
+      - name: Wait for services to be healthy
         run: |
-          timeout 60s sh -c 'until curl -s http://${{ secrets.EC2_HOST }}:8080'
+          timeout 60s sh -c '
+          until curl -fsS http://${{ secrets.EC2_HOST }}:8080; do
+          echo "Waiting for services to become healthy..."
+          sleep 2
+          done
+          ' 
 
       - name: OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.15.0
